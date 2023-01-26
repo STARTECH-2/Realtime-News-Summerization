@@ -1,1 +1,1 @@
-# Text-Summerization
+# News-Article-Summerization
