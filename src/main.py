@@ -1,9 +1,13 @@
+# from summarizer import Summarizer
+# from nltk import sent_tokenize
 from newsapi import NewsApiClient
 import pycountry
 from newsfetch.news import newspaper
+from sumy.summarizers.lex_rank import LexRankSummarizer
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
 import os
-from nltk import sent_tokenize
-from summarizer import Summarizer
+
 
 newsapi = NewsApiClient(api_key='0c5239181cb5425782763385b08f7f09')
 input_country = "India"
@@ -70,13 +74,20 @@ if choice <= len(lst_articles):
         file = open("news_article.txt", "a")
         file.write(news.article)
         file.close()
-    f = open("news_article.txt","r")
-    bert_model = Summarizer()
-    bert_summary = ''.join(bert_model(f.read(), min_length=60))
-    print("SUMMARY:")
-    summary = sent_tokenize(bert_summary)
-    for i in summary:
+    # f = open("news_article.txt","r")
+    # bert_model = Summarizer()
+    # bert_summary = ''.join(bert_model(f.read(), min_length=60))
+    # print("SUMMARY:")
+    # summary = sent_tokenize(bert_summary)
+    # for i in summary:
+    #     print(i)
+    LANGUAGE = "english"
+    parser = PlaintextParser.from_file("news_article.txt", Tokenizer(LANGUAGE))
+    summarizer = LexRankSummarizer()
+    sumy_summary = summarizer(parser.document, 6)
+    print("Summerization:")
+    for i in sumy_summary:
         print(i)
-
+    os.remove("news_article.txt")
 else:
     print('The article number You have selected is not available. Please try again later!!')
