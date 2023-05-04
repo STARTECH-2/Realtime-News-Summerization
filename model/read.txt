@@ -1,0 +1,6 @@
+Use this link to download and run the model : https://www.kaggle.com/code/sjsumanth/text-summarization-with-seq2seq-model
+
+DATASET:
+
+News Summary dataset : https://www.kaggle.com/datasets/sunnysai12345/news-summary
+Validation dataset (Custom) : https://www.kaggle.com/datasets/sjsumanth/validating-summerizations
